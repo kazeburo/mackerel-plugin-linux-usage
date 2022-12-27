@@ -109,6 +109,22 @@ func (u LinuxUsagePlugin) GraphDefinition() map[string]mp.Graphs {
 				{Name: "running", Label: "running", Diff: false, Stacked: false},
 			},
 		},
+		"linux-usage.tcp-opens": {
+			Label: "Linux CPU TCP Opens",
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "active", Label: "ActiveOpens", Diff: true, Stacked: false},
+				{Name: "passive", Label: "PassiveOpens", Diff: true, Stacked: false},
+			},
+		},
+		"linux-usage.tcp-listen": {
+			Label: "Linux CPU TCP Listen",
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "overflows", Label: "ListenOverflows", Diff: true, Stacked: false},
+				{Name: "drops", Label: "ListenDrops", Diff: true, Stacked: false},
+			},
+		},
 	}
 }
 
@@ -130,6 +146,19 @@ func (u LinuxUsagePlugin) FetchMetrics() (map[string]float64, error) {
 	if err != nil {
 		return res, err
 	}
+	selffs, err := pfs.Self()
+	if err != nil {
+		return res, err
+	}
+	psnmp, err := selffs.Snmp()
+	if err != nil {
+		return res, err
+	}
+	pnetstat, err := selffs.Netstat()
+	if err != nil {
+		return res, err
+	}
+
 	totalProcs := float64(0)
 	procRunning := float64(0)
 	for _, proc := range procs {
@@ -151,6 +180,10 @@ func (u LinuxUsagePlugin) FetchMetrics() (map[string]float64, error) {
 	res["loadavg15"] = loadavg.Load15 / cores
 	res["all"] = totalProcs
 	res["running"] = procRunning
+	res["active"] = *psnmp.Tcp.ActiveOpens
+	res["passive"] = *psnmp.Tcp.PassiveOpens
+	res["overflows"] = *pnetstat.ListenOverflows
+	res["drops"] = *pnetstat.ListenDrops
 
 	path := generateTempfilePath()
 
