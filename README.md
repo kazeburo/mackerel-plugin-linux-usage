@@ -1,6 +1,6 @@
 # mackerel-plugin-linux-usage
 
-mackerel metric plugin for linux usage. cpu usage (max 100%), load average per cores and number of processes 
+mackerel metric plugin for linux usage. CPU usage (max 100%), Load average per cores, Number of processes and TCP
 
 ## Usage
 
@@ -17,21 +17,25 @@ Help Options:
 
 ```
 $ ./mackerel-plugin-linux-usage
-linux-usage.cpu.guest_nice      0       1635315600
-linux-usage.cpu.guest   0       1635315600
-linux-usage.cpu.steal   2.103250        1635315600
-linux-usage.cpu.softirq 0.191205        1635315600
-linux-usage.cpu.irq     0       1635315600
-linux-usage.cpu.iowait  0.191205        1635315600
-linux-usage.cpu.idle    91.204589       1635315600
-linux-usage.cpu.system  0.956023        1635315600
-linux-usage.cpu.nice    0       1635315600
-linux-usage.cpu.user    5.353728        1635315600
-linux-usage.loadavg.loadavg1    0.030000        1635315600
-linux-usage.loadavg.loadavg5    0.045000        1635315600
-linux-usage.loadavg.loadavg15   0.070000        1635315600
-linux-usage.process.all 79      1635315600
-linux-usage.process.running     1       1635315600
+linux-usage.cpu.guest_nice      0       1672116689
+linux-usage.cpu.guest   0       1672116689
+linux-usage.cpu.steal   0.004797        1672116689
+linux-usage.cpu.softirq 0.155898        1672116689
+linux-usage.cpu.irq     0.088742        1672116689
+linux-usage.cpu.iowait  0.028781        1672116689
+linux-usage.cpu.idle    98.455413       1672116689
+linux-usage.cpu.system  0.765098        1672116689
+linux-usage.cpu.nice    0       1672116689
+linux-usage.cpu.user    0.501271        1672116689
+linux-usage.loadavg.loadavg1    0       1672116689
+linux-usage.loadavg.loadavg5    0       1672116689
+linux-usage.loadavg.loadavg15   0       1672116689
+linux-usage.process.all 86      1672116689
+linux-usage.process.running     2       1672116689
+linux-usage.tcp-opens.active    0       1672116689
+linux-usage.tcp-opens.passive   8.325359        1672116689
+linux-usage.tcp-listen.overflows        0       1672116689
+linux-usage.tcp-listen.drops    0       1672116689
 ```
 
 ## Install
